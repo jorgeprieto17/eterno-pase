@@ -1,0 +1,956 @@
+/* ==========================================================================
+   ETERNO PASE — MOTOR DE INVITACIONES INTERACTIVAS (3 IDENTIDADES VISUALES)
+   1. Boda: #6B705C / #CB997E / #FAF8F5 | Cormorant Garamond + Plus Jakarta Sans
+   2. XV Años: #2D1B4E / #D4AF37 / #120924 | Playfair Display + Montserrat
+   3. Cumpleaños: #A2D2FF / #FFD166 / #FFFDF9 | Fredoka/Quicksand + Plus Jakarta Sans
+   ========================================================================== */
+
+.ep-demo-stage {
+  min-height: 100dvh;
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ---------- TEMA 1: BODA (Valeria & Andrés) ---------- */
+.ep-demo-stage[data-demo-theme='boda'] {
+  --inv-primary: #6b705c;
+  --inv-secondary: #cb997e;
+  --inv-bg: #faf8f5;
+  --inv-surface: #ffffff;
+  --inv-surface-soft: #f3efe8;
+  --inv-text: #2b2d26;
+  --inv-muted: #666a5d;
+  --inv-border: rgba(107, 112, 92, 0.22);
+  --inv-btn-text: #faf8f5;
+  --inv-font-display: 'Cormorant Garamond', Georgia, serif;
+  --inv-font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --inv-splash-bg: linear-gradient(160deg, #faf8f5 0%, #ede6dc 100%);
+  --inv-card-shadow: 0 12px 32px rgba(43, 45, 38, 0.06);
+  --inv-input-bg: #fcfbf9;
+}
+
+/* ---------- TEMA 2: XV AÑOS (Mis XV Sofía) ---------- */
+.ep-demo-stage[data-demo-theme='xv'] {
+  --inv-primary: #2d1b4e;
+  --inv-secondary: #d4af37;
+  --inv-bg: #120924;
+  --inv-surface: #1e1138;
+  --inv-surface-soft: #271647;
+  --inv-text: #f9f5ff;
+  --inv-muted: #d5c7ea;
+  --inv-border: rgba(212, 175, 55, 0.28);
+  --inv-btn-text: #120924;
+  --inv-font-display: 'Playfair Display', Georgia, serif;
+  --inv-font-body: 'Montserrat', system-ui, sans-serif;
+  --inv-splash-bg: radial-gradient(circle at top, #3c2268 0%, #120924 72%);
+  --inv-card-shadow: 0 16px 38px rgba(0, 0, 0, 0.35);
+  --inv-input-bg: #160c2b;
+}
+
+/* ---------- TEMA 3: CUMPLEAÑOS (Mateo #3) ---------- */
+.ep-demo-stage[data-demo-theme='cumpleanos'] {
+  --inv-primary: #a2d2ff;
+  --inv-secondary: #ffd166;
+  --inv-bg: #fffdf9;
+  --inv-surface: #ffffff;
+  --inv-surface-soft: #eef7ff;
+  --inv-text: #1d3557;
+  --inv-muted: #457b9d;
+  --inv-border: rgba(69, 123, 157, 0.2);
+  --inv-btn-text: #1d3557;
+  --inv-font-display: 'Fredoka', 'Quicksand', sans-serif;
+  --inv-font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --inv-splash-bg: linear-gradient(160deg, #fffdf9 0%, #dff0ff 100%);
+  --inv-card-shadow: 0 12px 30px rgba(29, 53, 87, 0.08);
+  --inv-input-bg: #f8fbff;
+}
+
+.ep-demo-stage {
+  background-color: var(--inv-bg);
+  color: var(--inv-text);
+  font-family: var(--inv-font-body);
+}
+
+/* ==========================================================================
+   BARRA SUPERIOR DISCRETA DE NAVEGACIÓN DEL CATÁLOGO
+   ========================================================================== */
+
+.inv-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.6rem 0.85rem;
+  background: rgba(18, 18, 22, 0.84);
+  color: #ffffff;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.inv-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 0.42rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.inv-back-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.inv-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.inv-switcher::-webkit-scrollbar {
+  display: none;
+}
+
+.inv-switch-pill {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.36rem 0.68rem;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.inv-switch-pill.is-active {
+  background: #ffffff;
+  color: #18181b;
+}
+
+/* ==========================================================================
+   PANTALLA DE BIENVENIDA (SPLASH SCREEN)
+   ========================================================================== */
+
+.inv-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 65;
+  min-height: 100dvh;
+  background: var(--inv-splash-bg);
+  color: var(--inv-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4.5rem 1.35rem 2rem;
+  text-align: center;
+  transition: opacity 0.55s ease, transform 0.55s ease, visibility 0.55s ease;
+}
+
+.inv-splash.is-dismissed {
+  opacity: 0;
+  transform: scale(1.03);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.inv-splash__card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--inv-surface);
+  border: 1px solid var(--inv-border);
+  border-radius: 28px;
+  padding: 2.25rem 1.5rem;
+  box-shadow: var(--inv-card-shadow);
+  position: relative;
+}
+
+.inv-splash__seal {
+  width: 82px;
+  height: 82px;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--inv-font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border: 2px solid var(--inv-secondary);
+  background: var(--inv-surface-soft);
+  color: var(--inv-text);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  animation: epPulseSeal 2.8s ease-in-out infinite;
+}
+
+@keyframes epPulseSeal {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+.inv-splash__eyebrow {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--inv-muted);
+  margin: 0 0 0.45rem;
+}
+
+.inv-splash__title {
+  font-family: var(--inv-font-display);
+  font-size: clamp(2.1rem, 8vw, 2.85rem);
+  line-height: 1.06;
+  margin: 0 0 0.75rem;
+}
+
+.ep-demo-stage[data-demo-theme='xv'] .inv-splash__title {
+  color: #f3d678;
+}
+
+.inv-splash__subtext {
+  font-size: 0.9rem;
+  color: var(--inv-muted);
+  margin: 0 0 1.5rem;
+}
+
+.inv-splash__btn {
+  width: 100%;
+  border: 0;
+  border-radius: 999px;
+  padding: 1rem 1.35rem;
+  font-size: 0.98rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  background: var(--inv-primary);
+  color: var(--inv-btn-text);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.ep-demo-stage[data-demo-theme='xv'] .inv-splash__btn {
+  background: linear-gradient(135deg, #d4af37 0%, #f1d37a 100%);
+  color: #120924;
+}
+
+.ep-demo-stage[data-demo-theme='cumpleanos'] .inv-splash__btn {
+  background: linear-gradient(135deg, #a2d2ff 0%, #74b9ff 100%);
+  color: #1d3557;
+}
+
+.inv-splash__btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+}
+
+.inv-splash__music-hint {
+  margin: 0.9rem 0 0;
+  font-size: 0.75rem;
+  color: var(--inv-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+/* ==========================================================================
+   BOTÓN FLOTANTE DE MÚSICA (PLAY / PAUSE)
+   ========================================================================== */
+
+.inv-music-fab {
+  position: fixed;
+  left: 1rem;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 62;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.62rem 0.95rem 0.62rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--inv-border);
+  background: var(--inv-surface);
+  color: var(--inv-text);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  max-width: calc(100vw - 9.5rem);
+  transition: transform 0.2s ease;
+}
+
+.inv-music-fab:hover {
+  transform: translateY(-2px);
+}
+
+.inv-music-fab__icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--inv-secondary);
+  color: #18181b;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.inv-music-fab__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  text-align: left;
+}
+
+.inv-music-fab__label {
+  font-size: 0.73rem;
+  font-weight: 700;
+  line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 145px;
+}
+
+.inv-music-fab__state {
+  font-size: 0.66rem;
+  color: var(--inv-muted);
+}
+
+.inv-eq-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.inv-eq-bars span {
+  width: 2.5px;
+  height: 4px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.inv-music-fab.is-playing .inv-eq-bars span:nth-child(1) {
+  animation: epEq 0.7s ease-in-out infinite alternate;
+}
+
+.inv-music-fab.is-playing .inv-eq-bars span:nth-child(2) {
+  animation: epEq 0.55s ease-in-out 0.15s infinite alternate;
+}
+
+.inv-music-fab.is-playing .inv-eq-bars span:nth-child(3) {
+  animation: epEq 0.8s ease-in-out 0.3s infinite alternate;
+}
+
+@keyframes epEq {
+  from {
+    height: 3px;
+  }
+  to {
+    height: 12px;
+  }
+}
+
+/* ==========================================================================
+   CUERPO DE LA INVITACIÓN (CONTENEDOR MOBILE-FIRST)
+   ========================================================================== */
+
+.inv-shell {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.inv-card {
+  background: var(--inv-surface);
+  border: 1px solid var(--inv-border);
+  border-radius: 24px;
+  padding: 1.65rem 1.25rem;
+  box-shadow: var(--inv-card-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.inv-card__eyebrow {
+  display: block;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--inv-muted);
+  margin-bottom: 0.4rem;
+}
+
+.inv-card__title {
+  font-family: var(--inv-font-display);
+  font-size: clamp(1.7rem, 5.5vw, 2.2rem);
+  line-height: 1.12;
+  text-align: center;
+  margin: 0 0 0.55rem;
+}
+
+.ep-demo-stage[data-demo-theme='xv'] .inv-card__title {
+  color: #f3d678;
+}
+
+.inv-card__subtitle {
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--inv-muted);
+  margin: 0 auto 1.25rem;
+  max-width: 42ch;
+}
+
+/* ---------- PORTADA HERO ---------- */
+.inv-hero {
+  text-align: center;
+  padding: 2.2rem 1.35rem;
+}
+
+.ep-demo-stage[data-demo-theme='boda'] .inv-hero {
+  background: linear-gradient(180deg, #ffffff 0%, #f6f2eb 100%);
+}
+
+.ep-demo-stage[data-demo-theme='xv'] .inv-hero {
+  background: radial-gradient(circle at top, #351e5d 0%, #1b0f32 100%);
+}
+
+.ep-demo-stage[data-demo-theme='cumpleanos'] .inv-hero {
+  background: linear-gradient(180deg, #ffffff 0%, #eef7ff 100%);
+}
+
+.inv-ornament {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 0.85rem;
+  border-radius: 50%;
+  background: var(--inv-surface-soft);
+  border: 1.5px solid var(--inv-secondary);
+  display: grid;
+  place-items: center;
+  color: var(--inv-text);
+}
+
+.inv-hero__headline {
+  font-family: var(--inv-font-display);
+  font-size: clamp(2.35rem, 9vw, 3.35rem);
+  line-height: 1.04;
+  margin: 0.35rem 0 0.65rem;
+}
+
+.ep-demo-stage[data-demo-theme='xv'] .inv-hero__headline {
+  color: #f4d87c;
+}
+
+.inv-hero__date {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  background: var(--inv-surface-soft);
+  border: 1px solid var(--inv-border);
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 1.05rem;
+}
+
+.inv-hero__quote {
+  font-family: var(--inv-font-display);
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.35;
+  color: var(--inv-muted);
+  margin: 0 auto 1rem;
+  max-width: 34ch;
+}
+
+.inv-hero__city {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--inv-muted);
+}
+
+/* ---------- CUENTA REGRESIVA EN VIVO ---------- */
+.inv-countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.55rem;
+}
+
+.inv-time-box {
+  background: var(--inv-surface-soft);
+  border: 1px solid var(--inv-border);
+  border-radius: 16px;
+  padding: 0.85rem 0.35rem;
+  text-align: center;
+}
+
+.inv-time-box__value {
+  display: block;
+  font-family: var(--inv-font-display);
+  font-size: clamp(1.65rem, 6vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.ep-demo-stage[data-demo-theme='xv'] .inv-time-box__value {
+  color: #d4af37;
+}
+
+.inv-time-box__label {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--inv-muted);
+}
+
+/* ---------- PADRES / ANFITRIONES ---------- */
+.inv-hosts-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.inv-host-item {
+  text-align: center;
+  padding: 0.85rem 1rem;
+  border-radius: 16px;
+  background: var(--inv-surface-soft);
+  border: 1px solid var(--inv-border);
+}
+
+.inv-host-item__role {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--inv-muted);
+  margin-bottom: 0.2rem;
+}
+
+.inv-host-item__names {
+  font-family: var(--inv-font-display);
+  font-size: 1.32rem;
+  font-weight: 600;
+}
+
+/* ---------- UBICACIONES (MAPS & WAZE) ---------- */
+.inv-locations-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.inv-location-card {
+  border-radius: 18px;
+  padding: 1.15rem 1rem;
+  background: var(--inv-surface-soft);
+  border: 1px solid var(--inv-border);
+}
+
+.inv-location-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.45rem;
+}
+
+.inv-location-card__type {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--inv-muted);
+}
+
+.inv-location-card__time {
+  padding: 0.22rem 0.6rem;
+  border-radius: 999px;
+  background: var(--inv-secondary);
+  color: #18181b;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.inv-location-card__venue {
+  margin: 0 0 0.25rem;
+  font-family: var(--inv-font-display);
+  font-size: 1.4rem;
+  line-height: 1.15;
+}
+
+.inv-location-card__address {
+  margin: 0 0 0.9rem;
+  font-size: 0.84rem;
+  color: var(--inv-muted);
+}
+
+.inv-location-card__btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+}
+
+.inv-map-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.7rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 1px solid var(--inv-border);
+  background: var(--inv-surface);
+  color: var(--inv-text);
+  transition: transform 0.18s ease, background-color 0.18s ease;
+}
+
+.inv-map-btn:hover {
+  transform: translateY(-1px);
+}
+
+.inv-map-btn--primary {
+  background: var(--inv-primary);
+  color: var(--inv-btn-text);
+  border-color: transparent;
+}
+
+.ep-demo-stage[data-demo-theme='xv'] .inv-map-btn--primary {
+  background: #d4af37;
+  color: #120924;
+}
+
+/* ---------- ITINERARIO VISUAL (TIMELINE) ---------- */
+.inv-timeline {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+  padding-left: 0.25rem;
+}
+
+.inv-timeline::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: var(--inv-border);
+}
+
+.inv-timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 0.8rem;
+  align-items: start;
+}
+
+.inv-timeline-item__dot {
+  position: relative;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--inv-surface-soft);
+  border: 2px solid var(--inv-secondary);
+  display: grid;
+  place-items: center;
+  color: var(--inv-text);
+}
+
+.inv-timeline-item__body {
+  padding: 0.75rem 0.95rem;
+  border-radius: 16px;
+  background: var(--inv-surface-soft);
+  border: 1px solid var(--inv-border);
+}
+
+.inv-timeline-item__time {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--inv-muted);
+  margin-bottom: 0.15rem;
+}
+
+.inv-timeline-item__title {
+  margin: 0 0 0.2rem;
+  font-size: 0.96rem;
+  font-weight: 700;
+}
+
+.inv-timeline-item__desc {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--inv-muted);
+}
+
+/* ---------- CÓDIGO DE VESTIMENTA ---------- */
+.inv-dress-box {
+  text-align: center;
+  padding: 1.15rem 1rem;
+  border-radius: 18px;
+  background: var(--inv-surface-soft);
+  border: 1px solid var(--inv-border);
+}
+
+.inv-dress-box__title {
+  margin: 0 0 0.35rem;
+  font-family: var(--inv-font-display);
+  font-size: 1.45rem;
+}
+
+.inv-dress-box__desc {
+  margin: 0 0 0.95rem;
+  font-size: 0.86rem;
+  color: var(--inv-muted);
+}
+
+.inv-palette-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.inv-palette-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.28rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--inv-muted);
+}
+
+.inv-palette-chip__circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--inv-surface);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+}
+
+.inv-dress-box__note {
+  margin: 0;
+  padding: 0.55rem 0.75rem;
+  border-radius: 12px;
+  background: var(--inv-surface);
+  border: 1px dashed var(--inv-border);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* ---------- MESA DE REGALOS / COPIAR CLABE ---------- */
+.inv-bank-card {
+  border-radius: 18px;
+  padding: 1.2rem 1.05rem;
+  background: var(--inv-surface-soft);
+  border: 1px solid var(--inv-border);
+  text-align: center;
+}
+
+.inv-bank-card__bank {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  background: var(--inv-surface);
+  border: 1px solid var(--inv-border);
+  font-size: 0.74rem;
+  font-weight: 700;
+  margin-bottom: 0.55rem;
+}
+
+.inv-bank-card__owner {
+  margin: 0 0 0.35rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.inv-clabe-box {
+  margin: 0.5rem 0 0.85rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 12px;
+  background: var(--inv-surface);
+  border: 1px solid var(--inv-border);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  word-break: break-all;
+}
+
+.inv-copy-btn {
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  padding: 0.82rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: var(--inv-primary);
+  color: var(--inv-btn-text);
+  transition: transform 0.18s ease, background-color 0.2s ease;
+}
+
+.ep-demo-stage[data-demo-theme='xv'] .inv-copy-btn {
+  background: #d4af37;
+  color: #120924;
+}
+
+.inv-copy-btn.is-copied {
+  background: #16a34a !important;
+  color: #ffffff !important;
+}
+
+.inv-extra-notes {
+  list-style: none;
+  padding: 0;
+  margin: 0.9rem 0 0;
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  color: var(--inv-muted);
+}
+
+.inv-registries {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-top: 0.95rem;
+}
+
+.inv-registry-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.52rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--inv-border);
+  background: var(--inv-surface);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* ---------- FORMULARIO RSVP LIGERO (MOBILE FRIENDLY, >= 16px INPUTS) ---------- */
+.inv-rsvp-form {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.inv-field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.inv-field label {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.inv-field input,
+.inv-field select {
+  width: 100%;
+  padding: 0.78rem 0.9rem;
+  border-radius: 12px;
+  border: 1px solid var(--inv-border);
+  background: var(--inv-input-bg);
+  color: var(--inv-text);
+  font-size: 16px; /* Evita auto-zoom en Safari/WhatsApp WebView */
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inv-field input:focus,
+.inv-field select:focus {
+  border-color: var(--inv-secondary);
+  box-shadow: 0 0 0 3px rgba(203, 153, 126, 0.2);
+}
+
+.inv-rsvp-submit {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 0.95rem 1.1rem;
+  background: #25d366;
+  color: #062a13;
+  font-size: 0.94rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 10px 24px rgba(37, 211, 102, 0.26);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.inv-rsvp-submit:hover {
+  background: #20bd5b;
+  transform: translateY(-1px);
+}
+
+.inv-rsvp-deadline {
+  margin: 0.25rem 0 0;
+  text-align: center;
+  font-size: 0.76rem;
+  color: var(--inv-muted);
+}
+
+/* ---------- PIE DE PÁGINA EN LA INVITACIÓN ---------- */
+.inv-powered-footer {
+  text-align: center;
+  padding: 0.75rem 0 0.5rem;
+  font-size: 0.78rem;
+  color: var(--inv-muted);
+}
+
+.inv-powered-footer a,
+.inv-powered-footer button {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}

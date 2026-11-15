@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FAF8F4"/>
+      <stop offset="100%" stop-color="#EFE8DC"/>
+    </linearGradient>
+    <linearGradient id="seal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2B2720"/>
+      <stop offset="100%" stop-color="#6F5534"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="44" y="44" width="1112" height="542" rx="28" fill="none" stroke="#8C6D46" stroke-opacity="0.28" stroke-width="2"/>
+  <circle cx="1050" cy="140" r="180" fill="#CB997E" fill-opacity="0.14"/>
+  <circle cx="140" cy="510" r="160" fill="#A2D2FF" fill-opacity="0.18"/>
+  <rect x="546" y="110" width="108" height="108" rx="28" fill="url(#seal)"/>
+  <text x="600" y="177" text-anchor="middle" font-family="Georgia, serif" font-size="44" font-weight="700" fill="#FAF8F4">EP</text>
+  <text x="600" y="290" text-anchor="middle" font-family="Georgia, serif" font-size="82" font-weight="700" fill="#1C1B18">Eterno Pase</text>
+  <text x="600" y="355" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" fill="#57544C">Una invitación que no se desecha, dura para siempre</text>
+  <rect x="255" y="425" width="210" height="52" rx="26" fill="#6B705C"/>
+  <text x="360" y="458" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#FAF8F5">Boda Editorial</text>
+  <rect x="495" y="425" width="210" height="52" rx="26" fill="#2D1B4E"/>
+  <text x="600" y="458" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#D4AF37">XV Años Gala</text>
+  <rect x="735" y="425" width="210" height="52" rx="26" fill="#A2D2FF"/>
+  <text x="840" y="458" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#1D3557">Cumpleaños</text>
+</svg>

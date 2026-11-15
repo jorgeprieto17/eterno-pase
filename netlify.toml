@@ -1,0 +1,14 @@
+[[redirects]]
+  from = "/boda"
+  to = "/boda.html"
+  status = 200
+
+[[redirects]]
+  from = "/xv"
+  to = "/xv.html"
+  status = 200
+
+[[redirects]]
+  from = "/cumpleanos"
+  to = "/cumpleanos.html"
+  status = 200

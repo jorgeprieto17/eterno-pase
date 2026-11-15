@@ -1,0 +1,787 @@
+/* ==========================================================================
+   ETERNO PASE — ESTILOS PRINCIPALES DEL HUB / CATÁLOGO & UTILIDADES GLOBALES
+   100% Mobile-First | Optimizado para WebView de WhatsApp
+   ========================================================================== */
+
+:root {
+  --ep-bg: #faf8f4;
+  --ep-surface: #ffffff;
+  --ep-surface-alt: #f3efe7;
+  --ep-ink: #1c1b18;
+  --ep-ink-soft: #57544c;
+  --ep-accent: #8c6d46;
+  --ep-accent-deep: #5e472b;
+  --ep-border: rgba(28, 27, 24, 0.1);
+  --ep-wa: #25d366;
+  --ep-wa-dark: #169c49;
+  --ep-radius-lg: 22px;
+  --ep-radius-md: 14px;
+  --ep-radius-pill: 999px;
+  --ep-shadow-sm: 0 4px 14px rgba(28, 27, 24, 0.05);
+  --ep-shadow-md: 0 14px 36px rgba(28, 27, 24, 0.09);
+  --ep-font-display: 'Cormorant Garamond', Georgia, serif;
+  --ep-font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--ep-bg);
+  color: var(--ep-ink);
+  font-family: var(--ep-font-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   HEADER MINIMALISTA DE MARCA
+   ========================================================================== */
+
+.ep-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(250, 248, 244, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--ep-border);
+}
+
+.ep-header__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.ep-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.ep-brand__mark {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2b2720 0%, #6f5534 100%);
+  color: #faf8f4;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 16px rgba(94, 71, 43, 0.22);
+}
+
+.ep-brand__copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ep-brand__logo {
+  font-family: var(--ep-font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--ep-ink);
+}
+
+.ep-brand__slogan {
+  font-size: 0.7rem;
+  color: var(--ep-ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.ep-header__cta {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: var(--ep-radius-pill);
+  background: var(--ep-ink);
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.ep-header__cta:hover {
+  background: var(--ep-accent-deep);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   CONTENEDOR PRINCIPAL DEL HUB
+   ========================================================================== */
+
+.ep-container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ==========================================================================
+   HERO COMPACTO MOBILE-FIRST
+   ========================================================================== */
+
+.ep-hero {
+  position: relative;
+  padding: 2.25rem 0 1.75rem;
+  text-align: center;
+}
+
+.ep-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(203, 153, 126, 0.16), transparent 52%),
+    radial-gradient(circle at 85% 25%, rgba(162, 210, 255, 0.18), transparent 48%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.ep-pill-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.85rem;
+  border-radius: var(--ep-radius-pill);
+  background: rgba(140, 109, 70, 0.11);
+  color: var(--ep-accent-deep);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ep-hero__title {
+  font-family: var(--ep-font-display);
+  font-size: clamp(2.15rem, 6.5vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.06;
+  margin: 0.9rem auto 0.75rem;
+  max-width: 18ch;
+  letter-spacing: -0.015em;
+}
+
+.ep-hero__title em {
+  font-style: italic;
+  color: var(--ep-accent);
+  font-weight: 600;
+}
+
+.ep-hero__subtitle {
+  margin: 0 auto 1.35rem;
+  max-width: 58ch;
+  font-size: 0.96rem;
+  color: var(--ep-ink-soft);
+}
+
+.ep-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.ep-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 0;
+  border-radius: var(--ep-radius-pill);
+  padding: 0.85rem 1.35rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.ep-btn:active {
+  transform: scale(0.98);
+}
+
+.ep-btn--primary {
+  background: var(--ep-ink);
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(28, 27, 24, 0.16);
+}
+
+.ep-btn--primary:hover {
+  background: #2f2c26;
+  transform: translateY(-1px);
+}
+
+.ep-btn--whatsapp {
+  background: var(--ep-wa);
+  color: #062a13;
+  box-shadow: 0 10px 24px rgba(37, 211, 102, 0.25);
+}
+
+.ep-btn--whatsapp:hover {
+  background: #20bd5b;
+  transform: translateY(-1px);
+}
+
+.ep-btn--ghost {
+  background: var(--ep-surface);
+  color: var(--ep-ink);
+  border: 1px solid var(--ep-border);
+}
+
+.ep-trust-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem 1.25rem;
+  font-size: 0.8rem;
+  color: var(--ep-ink-soft);
+}
+
+.ep-trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+}
+
+.ep-trust-item svg {
+  color: var(--ep-accent);
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   SECCIÓN CATÁLOGO DE DEMOS INTERACTIVAS
+   ========================================================================== */
+
+.ep-section {
+  padding: 2rem 0;
+}
+
+.ep-section-head {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.ep-section-head__kicker {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ep-accent);
+  margin-bottom: 0.35rem;
+}
+
+.ep-section-head__title {
+  font-family: var(--ep-font-display);
+  font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+  line-height: 1.12;
+  margin: 0 0 0.45rem;
+}
+
+.ep-section-head__desc {
+  margin: 0 auto;
+  max-width: 52ch;
+  font-size: 0.92rem;
+  color: var(--ep-ink-soft);
+}
+
+.ep-demos-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.ep-demo-card {
+  background: var(--ep-surface);
+  border: 1px solid var(--ep-border);
+  border-radius: var(--ep-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--ep-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ep-demo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ep-shadow-md);
+}
+
+/* Vista previa temática dentro de cada tarjeta */
+.ep-demo-preview {
+  position: relative;
+  padding: 1.5rem 1.25rem 1.35rem;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.ep-demo-preview::after {
+  content: '';
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  right: -35px;
+  top: -35px;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.ep-demo-preview--boda {
+  background: linear-gradient(145deg, #faf8f5 0%, #efe9df 100%);
+  color: #2b2d26;
+  border-bottom: 1px solid rgba(107, 112, 92, 0.18);
+}
+
+.ep-demo-preview--boda::after {
+  background: #cb997e;
+}
+
+.ep-demo-preview--xv {
+  background: linear-gradient(145deg, #2d1b4e 0%, #120924 100%);
+  color: #f9f5ff;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.28);
+}
+
+.ep-demo-preview--xv::after {
+  background: #d4af37;
+}
+
+.ep-demo-preview--cumpleanos {
+  background: linear-gradient(145deg, #fffdf9 0%, #e7f3ff 100%);
+  color: #1d3557;
+  border-bottom: 1px solid rgba(162, 210, 255, 0.45);
+}
+
+.ep-demo-preview--cumpleanos::after {
+  background: #ffd166;
+  opacity: 0.45;
+}
+
+.ep-demo-preview__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.ep-demo-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.7rem;
+  border-radius: var(--ep-radius-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.ep-demo-preview--boda .ep-demo-badge {
+  background: #6b705c;
+  color: #faf8f5;
+}
+
+.ep-demo-preview--xv .ep-demo-badge {
+  background: rgba(212, 175, 55, 0.2);
+  color: #f5d87e;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+}
+
+.ep-demo-preview--cumpleanos .ep-demo-badge {
+  background: #ffd166;
+  color: #1d3557;
+}
+
+.ep-demo-swatches {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ep-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+}
+
+.ep-demo-preview__main {
+  margin-top: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.ep-demo-preview__style {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.78;
+}
+
+.ep-demo-preview__title {
+  margin: 0.25rem 0 0.3rem;
+  font-size: 1.85rem;
+  line-height: 1.08;
+}
+
+.ep-demo-preview--boda .ep-demo-preview__title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 700;
+}
+
+.ep-demo-preview--xv .ep-demo-preview__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  color: #f6e2a1;
+}
+
+.ep-demo-preview--cumpleanos .ep-demo-preview__title {
+  font-family: 'Fredoka', 'Quicksand', sans-serif;
+  font-weight: 600;
+}
+
+.ep-demo-preview__meta {
+  font-size: 0.82rem;
+  opacity: 0.86;
+}
+
+.ep-demo-card__body {
+  padding: 1.2rem 1.25rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.9rem;
+}
+
+.ep-demo-card__desc {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--ep-ink-soft);
+}
+
+.ep-demo-card__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.ep-chip {
+  font-size: 0.73rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 8px;
+  background: var(--ep-surface-alt);
+  color: var(--ep-ink-soft);
+}
+
+.ep-demo-card__actions {
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.ep-demo-launch-btn {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: var(--ep-radius-md);
+  border: 0;
+  background: var(--ep-ink);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.ep-demo-launch-btn:hover {
+  background: var(--ep-accent-deep);
+  transform: translateY(-1px);
+}
+
+.ep-demo-direct-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 0.85rem;
+  border-radius: var(--ep-radius-md);
+  border: 1px solid var(--ep-border);
+  background: var(--ep-surface);
+  color: var(--ep-ink);
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.ep-demo-direct-link:hover {
+  background: var(--ep-surface-alt);
+}
+
+/* ==========================================================================
+   SECCIÓN DE BENEFICIOS CLAVE
+   ========================================================================== */
+
+.ep-benefits-section {
+  background: var(--ep-surface);
+  border-top: 1px solid var(--ep-border);
+  border-bottom: 1px solid var(--ep-border);
+}
+
+.ep-benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+}
+
+.ep-benefit-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 1rem 1.05rem;
+  border-radius: var(--ep-radius-md);
+  background: var(--ep-bg);
+  border: 1px solid rgba(28, 27, 24, 0.06);
+}
+
+.ep-benefit-card__icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--ep-accent-deep);
+  border: 1px solid var(--ep-border);
+  display: grid;
+  place-items: center;
+}
+
+.ep-benefit-card__title {
+  margin: 0 0 0.2rem;
+  font-size: 0.96rem;
+  font-weight: 700;
+}
+
+.ep-benefit-card__text {
+  margin: 0;
+  font-size: 0.84rem;
+  color: var(--ep-ink-soft);
+}
+
+/* ==========================================================================
+   BANNER FINAL DE CONVERSIÓN Y FOOTER
+   ========================================================================== */
+
+.ep-cta-banner {
+  background: linear-gradient(135deg, #24211b 0%, #3d3324 100%);
+  color: #faf8f4;
+  border-radius: var(--ep-radius-lg);
+  padding: 1.75rem 1.35rem;
+  text-align: center;
+  box-shadow: var(--ep-shadow-md);
+}
+
+.ep-cta-banner__title {
+  font-family: var(--ep-font-display);
+  font-size: clamp(1.65rem, 5vw, 2.25rem);
+  line-height: 1.12;
+  margin: 0 0 0.5rem;
+}
+
+.ep-cta-banner__text {
+  margin: 0 auto 1.25rem;
+  max-width: 50ch;
+  font-size: 0.9rem;
+  color: rgba(250, 248, 244, 0.82);
+}
+
+.ep-usecases-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.35rem;
+}
+
+.ep-usecase-pill {
+  padding: 0.38rem 0.78rem;
+  border-radius: var(--ep-radius-pill);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  font-size: 0.78rem;
+}
+
+.ep-footer {
+  padding: 1.75rem 1rem 5.5rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--ep-ink-soft);
+}
+
+.ep-footer strong {
+  color: var(--ep-ink);
+}
+
+/* ==========================================================================
+   BOTÓN FLOTANTE DE WHATSAPP Y NOTIFICACIÓN TOAST
+   ========================================================================== */
+
+.ep-wa-float {
+  position: fixed;
+  right: 1rem;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.78rem 1.15rem;
+  border-radius: var(--ep-radius-pill);
+  background: var(--ep-wa);
+  color: #062a13;
+  font-size: 0.86rem;
+  font-weight: 700;
+  box-shadow: 0 12px 28px rgba(22, 156, 73, 0.34);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ep-wa-float:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(22, 156, 73, 0.42);
+}
+
+.ep-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 5rem;
+  transform: translate(-50%, 16px);
+  z-index: 90;
+  background: #18181b;
+  color: #ffffff;
+  padding: 0.72rem 1.15rem;
+  border-radius: var(--ep-radius-pill);
+  font-size: 0.84rem;
+  font-weight: 600;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  max-width: calc(100vw - 2rem);
+  text-align: center;
+}
+
+.ep-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ==========================================================================
+   RESPONSIVE TABLET Y DESKTOP
+   ========================================================================== */
+
+@media (min-width: 720px) {
+  .ep-header__inner {
+    padding: 0.85rem 1.5rem;
+  }
+
+  .ep-hero {
+    padding: 3.25rem 0 2.5rem;
+  }
+
+  .ep-demos-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.35rem;
+  }
+
+  .ep-benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ep-benefits-grid .ep-benefit-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .ep-cta-banner {
+    padding: 2.5rem 2rem;
+  }
+}
+
+@media (min-width: 980px) {
+  .ep-benefits-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .ep-benefits-grid .ep-benefit-card:last-child {
+    grid-column: auto;
+  }
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#FAF8F5"/>
+  <circle cx="1030" cy="120" r="210" fill="#CB997E" fill-opacity="0.16"/>
+  <circle cx="170" cy="520" r="200" fill="#6B705C" fill-opacity="0.13"/>
+  <rect x="52" y="52" width="1096" height="526" rx="28" fill="#FFFFFF" stroke="#6B705C" stroke-opacity="0.3" stroke-width="2"/>
+  <text x="600" y="158" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="6" fill="#6B705C">NUESTRA BODA · ETERNO PASE</text>
+  <text x="600" y="295" text-anchor="middle" font-family="Georgia, serif" font-size="96" font-weight="700" fill="#2B2D26">Valeria &amp; Andrés</text>
+  <line x1="470" y1="335" x2="730" y2="335" stroke="#CB997E" stroke-width="3"/>
+  <text x="600" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" fill="#666A5D">Sábado 24 de Abril de 2027 · San Miguel de Allende</text>
+  <rect x="440" y="455" width="320" height="58" rx="29" fill="#6B705C"/>
+  <text x="600" y="492" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#FAF8F5">Abrir Invitación Digital</text>
+</svg>

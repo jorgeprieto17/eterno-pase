@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="xvbg" cx="50%" cy="25%" r="80%">
+      <stop offset="0%" stop-color="#3F246D"/>
+      <stop offset="100%" stop-color="#120924"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#xvbg)"/>
+  <rect x="52" y="52" width="1096" height="526" rx="28" fill="none" stroke="#D4AF37" stroke-opacity="0.55" stroke-width="2.5"/>
+  <circle cx="600" cy="140" r="46" fill="#2D1B4E" stroke="#D4AF37" stroke-width="2.5"/>
+  <text x="600" y="152" text-anchor="middle" font-family="Georgia, serif" font-size="32" font-weight="700" fill="#D4AF37">XV</text>
+  <text x="600" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="6" fill="#D5C7EA">NOCHE DE GALA · ETERNO PASE</text>
+  <text x="600" y="350" text-anchor="middle" font-family="Georgia, serif" font-size="96" font-weight="700" fill="#F4D87C">Mis XV Sofía</text>
+  <text x="600" y="415" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" fill="#F9F5FF">Sábado 15 de Mayo de 2027 · Guadalajara, Jal.</text>
+  <rect x="440" y="465" width="320" height="58" rx="29" fill="#D4AF37"/>
+  <text x="600" y="502" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#120924">Abrir Invitación VIP</text>
+</svg>
