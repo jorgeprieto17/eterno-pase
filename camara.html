@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Cámara Desechable en Vivo | Álbum Eterno — Eterno Pase</title>
+  <meta
+    name="description"
+    content="Captura momentos en vivo con estética analógica 35mm y guárdalos al instante en el álbum Polaroid colaborativo del evento."
+  />
+  <meta name="theme-color" content="#121212" />
+
+  <!-- Open Graph / WhatsApp Preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_MX" />
+  <meta property="og:site_name" content="Eterno Pase" />
+  <meta property="og:title" content="Cámara Desechable en Vivo | Álbum Eterno — Eterno Pase" />
+  <meta
+    property="og:description"
+    content="Toma hasta 10 disparos analógicos 35mm en vivo y revela tus Polaroids al instante en el Álbum Eterno."
+  />
+  <meta property="og:image" content="assets/og-camara.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Google Fonts (Cormorant Garamond + Plus Jakarta Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/camera.css" />
+</head>
+<body>
+  <header class="cam-header">
+    <div class="cam-header__inner">
+      <a id="cam-back-link" class="cam-back-link" href="index.html">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m15 18-6-6 6-6" />
+        </svg>
+        <span id="cam-back-label">Catálogo Eterno Pase</span>
+      </a>
+      <span class="cam-brand-tag">Eterno Pase · 35mm</span>
+    </div>
+  </header>
+
+  <main class="cam-main">
+    <section class="cam-intro" aria-labelledby="cam-page-title">
+      <h1 class="cam-intro__title" id="cam-page-title">Cámara Desechable en Vivo</h1>
+      <p class="cam-intro__subtitle" id="cam-event-subtitle">Álbum Eterno · Boda Valeria &amp; Andrés</p>
+    </section>
+
+    <section class="cam-guest-bar" aria-label="Firma del invitado">
+      <label class="cam-guest-bar__label" for="cam-guest-name">Tu firma en las Polaroids (opcional)</label>
+      <div class="cam-guest-bar__input-wrap">
+        <svg class="cam-guest-bar__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 20h9" />
+          <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+        </svg>
+        <input
+          id="cam-guest-name"
+          class="cam-guest-bar__input"
+          type="text"
+          maxlength="40"
+          autocomplete="name"
+          placeholder="Ej. Sofía M. · Mesa 4"
+        />
+      </div>
+    </section>
+
+    <section class="cam-studio" aria-label="Visor y controles de cámara">
+      <div class="cam-viewfinder" id="cam-viewfinder">
+        <video id="cam-video" class="cam-video" autoplay playsinline muted></video>
+        <canvas
+          id="cam-sim-canvas"
+          class="cam-sim-canvas is-hidden"
+          width="720"
+          height="960"
+          aria-label="Visor analógico de prueba en vivo"
+        ></canvas>
+
+        <div class="cam-viewfinder__vignette" aria-hidden="true"></div>
+
+        <div class="cam-focus-corners" aria-hidden="true">
+          <span class="cam-focus-corner cam-focus-corner--tl"></span>
+          <span class="cam-focus-corner cam-focus-corner--tr"></span>
+          <span class="cam-focus-corner cam-focus-corner--bl"></span>
+          <span class="cam-focus-corner cam-focus-corner--br"></span>
+          <span class="cam-focus-reticle"></span>
+        </div>
+
+        <div class="cam-hud-top">
+          <div id="cam-live-badge" class="cam-hud-pill">
+            <span class="cam-live-dot" aria-hidden="true"></span>
+            <span id="cam-live-label">EN VIVO · ISO 400</span>
+          </div>
+          <div id="cam-shots-badge" class="cam-hud-pill cam-hud-pill--shots" aria-live="polite">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect width="18" height="18" x="3" y="3" rx="2" />
+              <path d="M7 3v18" />
+              <path d="M17 3v18" />
+              <path d="M3 7.5h4" />
+              <path d="M3 12h18" />
+              <path d="M3 16.5h4" />
+              <path d="M17 7.5h4" />
+              <path d="M17 16.5h4" />
+            </svg>
+            <span id="cam-shots-counter">10 / 10 disparos</span>
+          </div>
+        </div>
+
+        <div id="cam-flash-overlay" class="cam-flash-overlay" aria-hidden="true"></div>
+
+        <div id="cam-fallback-overlay" class="cam-fallback-overlay is-hidden" role="region" aria-label="Opciones de acceso a cámara">
+          <div class="cam-fallback-overlay__icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+              <circle cx="12" cy="13" r="3" />
+            </svg>
+          </div>
+          <h2 class="cam-fallback-overlay__title">Visor sin cámara activa</h2>
+          <p class="cam-fallback-overlay__desc" id="cam-fallback-message">
+            Activa el permiso de tu cámara, sube una foto desde tu carrete o prueba el visor analógico simulado.
+          </p>
+          <div class="cam-fallback-actions">
+            <button type="button" id="cam-retry-btn" class="cam-fallback-btn cam-fallback-btn--primary">
+              Reintentar cámara
+            </button>
+            <label for="cam-file-input" id="cam-fallback-native-btn" class="cam-fallback-btn" role="button" tabindex="0">
+              Abrir cámara nativa / galería
+            </label>
+            <button type="button" id="cam-sim-btn" class="cam-fallback-btn">
+              Activar visor analógico de prueba
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cam-controls" role="group" aria-label="Controles de disparo">
+        <button
+          type="button"
+          id="cam-switch-btn"
+          class="cam-control-btn"
+          aria-label="Alternar cámara trasera y frontal"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 19H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5" />
+            <path d="M13 5h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-5" />
+            <circle cx="12" cy="12" r="3" />
+            <path d="m18 22-3-3 3-3" />
+            <path d="m6 2 3 3-3 3" />
+          </svg>
+          <span id="cam-switch-label">Voltear</span>
+        </button>
+
+        <button
+          type="button"
+          id="cam-shutter-btn"
+          class="cam-shutter-btn"
+          aria-label="Tomar foto Polaroid"
+        >
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <path d="m14.31 8 5.74 9.94" />
+            <path d="M9.69 8h11.48" />
+            <path d="m7.38 12 5.74-9.94" />
+            <path d="M9.69 16 3.95 6.06" />
+            <path d="M14.31 16H2.83" />
+            <path d="m16.62 12-5.74 9.94" />
+          </svg>
+        </button>
+
+        <input
+          id="cam-file-input"
+          class="sr-only"
+          type="file"
+          accept="image/*"
+          capture="environment"
+          tabindex="-1"
+          aria-hidden="true"
+        />
+        <label
+          for="cam-file-input"
+          id="cam-native-label"
+          class="cam-control-btn"
+          role="button"
+          tabindex="0"
+          aria-label="Abrir cámara nativa o carrete de fotos"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+            <circle cx="9" cy="9" r="2" />
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+          </svg>
+          <span>Carrete</span>
+        </label>
+      </div>
+
+      <div id="cam-status-banner" class="cam-status-banner is-hidden" role="status" aria-live="polite">
+        <span class="cam-status-banner__icon" id="cam-status-icon" aria-hidden="true"></span>
+        <span id="cam-status-text"></span>
+      </div>
+
+      <div id="cam-demo-badge" class="cam-demo-badge is-hidden" role="note">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4" />
+          <path d="M12 8h.01" />
+        </svg>
+        <span>
+          <strong>Modo Demo activo:</strong> <code>APPS_SCRIPT_URL</code> aún no está conectado a Google Drive. Tus Polaroids se revelan y guardan localmente; sigue <code>README_APPS_SCRIPT.md</code> para activar el álbum compartido.
+        </span>
+      </div>
+    </section>
+
+    <section class="cam-gallery-section" aria-labelledby="cam-gallery-heading">
+      <div class="cam-gallery-head">
+        <div>
+          <span class="cam-gallery-head__kicker">Recuerdos Instantáneos</span>
+          <h2 class="cam-gallery-head__title" id="cam-gallery-heading">Tu Rollo · Galería Polaroid</h2>
+        </div>
+
+        <button type="button" id="cam-load-public-btn" class="cam-public-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" x2="12" y1="15" y2="3" />
+          </svg>
+          <span>Cargar fotos públicas del álbum (Drive)</span>
+        </button>
+      </div>
+
+      <div id="cam-gallery-empty" class="cam-gallery-empty">
+        <strong>Tu rollo está listo para el primer disparo</strong>
+        Cada instantánea se revela en formato Polaroid 35mm y se suma al Álbum Eterno.
+      </div>
+
+      <div id="cam-polaroid-grid" class="polaroid-grid" aria-live="polite"></div>
+
+      <div id="cam-public-section" class="cam-public-section is-hidden" aria-live="polite">
+        <h3 class="cam-public-section__title">Álbum Público del Evento (Drive)</h3>
+        <p class="cam-public-section__status" id="cam-public-status"></p>
+        <div id="cam-public-grid" class="polaroid-grid"></div>
+      </div>
+
+      <div class="cam-gallery-footer">
+        <p class="cam-gallery-footer__note">
+          Cámara analógica web · Guardado automático en este rollo y respaldo en la nube.
+        </p>
+        <button type="button" id="cam-reset-roll-btn" class="cam-reset-btn">
+          Reiniciar contador de prueba (10 disparos)
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <div id="cam-toast" class="cam-toast" role="status" aria-live="polite"></div>
+
+  <script src="js/driveUploader.js?v=1"></script>
+  <script src="js/cameraApp.js?v=1"></script>
+</body>
+</html>

@@ -529,6 +529,17 @@
             ${registriesHtml}
           </section>
 
+          <!-- Cámara Desechable en Vivo · Álbum Eterno -->
+          <section class="inv-card" aria-labelledby="ep-camera-heading">
+            <span class="inv-card__eyebrow">Álbum Colaborativo en Vivo</span>
+            <h2 class="inv-card__title" id="ep-camera-heading">Cámara Desechable del Evento</h2>
+            <p class="inv-card__subtitle">Captura momentos espontáneos con estética analógica (10 disparos por invitado) y guárdalos al instante en nuestro álbum de Google Drive.</p>
+            <a class="inv-map-btn inv-map-btn--primary" href="camara.html?evento=${encodeURIComponent(demo.id)}" style="display: inline-flex; width: 100%; padding: 0.88rem 1rem; font-size: 0.88rem; gap: 0.5rem;">
+              ${ICONS.camera}
+              <span>Abrir Cámara del Evento</span>
+            </a>
+          </section>
+
           <!-- Confirmación RSVP vía WhatsApp -->
           <section class="inv-card" aria-labelledby="ep-rsvp-heading">
             <span class="inv-card__eyebrow">Confirmación Directa</span>
